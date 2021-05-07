@@ -14,11 +14,11 @@
             <table cellpadding="8">
                 <tr>
                     <td>Username: </td>
-                    <td><input type="text" name="nama"></td>
+                    <td><input type="text" name="username"></td>
                 </tr>
                 <tr>
                     <td>Password: </td>
-                    <td><input type="text" name="jenisKelamin"></td>
+                    <td><input type="text" name="password"></td>
                 </tr>
                 <tr>
             </table>
