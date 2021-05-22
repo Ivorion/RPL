@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masuk ke sistem</title>
+    <title>Sign In</title>
 </head>
 <body>
 
     <div class="login">
-    <h1>Login</h1>
+    <h1>Sign In</h1>
+    <h3>Don't have an account? <a href="anggota_register.php">Sign Up</a></h5>
         <form action='' method=''>
             <table cellpadding="8">
                 <tr>
@@ -23,7 +24,7 @@
                 <tr>
             </table>
             <hr>
-            <button type='submit'>Login</button>
+            <button type='submit'>Sign in</button>
     </div>
 
 </body>

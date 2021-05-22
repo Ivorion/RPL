@@ -4,71 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar</title>
+    <title>Register Anggota</title>
 </head>
 <body>
     <div class="register">
-        <h1>Register</h1>
+        <h1>Get Started</h1>
+        <h3>Already have an account? <a href="anggota_login.php">Sign In</a></h5>
         <form action='' method=''>
             <table cellpadding="8">
             <tr>
-                <td>Nama: </td>
-                <td><input type="text" name="nama"></td>
+                <td>Username: </td>
+                <td><input type="text" name="username"></td>
             </tr>
             <tr>
-                <td>Jenis Kelamin: </td>
-                <td>
-                    <select name="jenisKelamin">
-                        <option value="pria">Pria</option>
-                        <option value="wanita">Wanita</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Agama: </td>
-                <td>
-                    <select name="agama">
-                        <option value="kristen">Kristen</option>
-                        <option value="katolik">Katolik</option>
-                        <option value="islam">Islam</option>
-                        <option value="buddha">Buddha</option>
-                        <option value="hindu">Hindu</option>
-                        <option value="konghucu">Konghucu</option>
-                        <option value="lain-lain">Lain-Lain</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Tempat Lahir: </td>
-                <td><input type="text" name="tempatLahir"></td>
-            </tr>
-            <tr>
-                <td>Tanggal Lahir: </td>
-                <td><input type='date' name="tanggalLahir"></td>
-            </tr>
-            <tr>
-                <td>Alamat: </td>
-                <td><input type='text' name="alamat"></td>
-            </tr>
-            <tr>
-                <td>No. Telepon: </td>
-                <td><input type='text' name="noTelepon"></td>
+                <td>Email: </td>
+                <td><input type='text' name="email"></td>
             </tr>
             <tr>
                 <td>Password: </td>
                 <td><input type='password' name="password"></td>
             </tr>
-            <tr>
-                <td>Re-Type Password: </td>
-                <td><input type='password' name="rePassword"></td>
-            </tr>
-            <tr>
-                <td>Foto: </td>
-                <td><input type='button' name="foto" value='Upload'></td>
-            </tr>
             </table>
             <hr>
-            <button type='submit'>Daftar</button>
+            <button type='submit'>Sign Up</button>
         </form>
     </div>
 </body>
