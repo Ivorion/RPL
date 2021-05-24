@@ -11,7 +11,7 @@
     <div class="register">
         <h1>Form Registrasi</h1>
         <hr>
-        <form action='' method=''>
+        <form action='proses_registrasi_anggota.php' method='POST'>
             <table cellpadding="8">
             <tr>
                 <td>Nama Lengkap: </td>
@@ -105,7 +105,7 @@
             </tr>
             </table>
             <hr>
-            <button type='submit'>Sign Up</button>
+            <button type='submit' name="submit">Sign Up</button>
         </form>
     </div>
 </body>
