@@ -1,3 +1,5 @@
+<?php include 'proses_anggota_register.php'?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +11,21 @@
 <body>
     <div class="register">
         <h1>Get Started</h1>
+       
+        <?php 
+            if(count($errors) > 0) {
+                foreach($errors as $error){
+                    echo $error . "<br>";
+                }
+            }
+
+            if(count($success) > 0){
+                echo $success[0];
+            }
+        ?>
+        
         <h3>Already have an account? <a href="anggota_login.php">Sign In</a></h5>
-        <form action='' method=''>
+        <form action='' method='POST'>
             <table cellpadding="8">
             <tr>
                 <td>Username: </td>
@@ -26,7 +41,7 @@
             </tr>
             </table>
             <hr>
-            <button type='submit'>Sign Up</button>
+            <button type='submit' name='submit'>Sign Up</button>
         </form>
     </div>
 </body>
