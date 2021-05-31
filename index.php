@@ -41,9 +41,14 @@
     
 </body>
 <script>
-    let signIn = document.querySelector(".sign-in");
+    let signIn = document.querySelector('.sign-in');
+    let signUp = document.querySelector('.sign-up');
+    let aboutUs = document.querySelector('.about-us');
     signIn.addEventListener('click',function(){
         window.location.href = 'anggota/anggota_login.php';
+    })
+    signUp.addEventListener('click',function(){
+        window.location.href = 'anggota/anggota_register.php';
     })
 </script>
 </html>
