@@ -37,7 +37,7 @@ if(isset($_POST["submit"])){
     }
 
     if(count($errors) == 0){
-        $hash_password = md5($password);
+        $hash_password = password_hash($password, PASSWORD_DEFAULT);
         $result = $conn->query("INSERT INTO anggota_login (id, username, email, password) VALUES ('', '$username', '$email', '$hash_password')");
         $success[] = "Berhasil Mendaftar";
     }
