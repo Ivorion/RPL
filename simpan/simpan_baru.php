@@ -26,7 +26,7 @@
             </tr>
             <tr>
                 <td>Besar Simpanan: </td>
-                <td><input type="text" name='besarPinjaman'></td>
+                <td><input type="text" name='besarSimpanan'></td>
             </tr>
         </table>
         <hr>
