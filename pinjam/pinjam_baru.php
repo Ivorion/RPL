@@ -25,7 +25,14 @@
                 <td><input type="text" name='tglSimpanan'></td>
             </tr>
             <tr>
-                <td>Besar Simpanan: </td>
+                <td>Jenis Pinjaman</td>
+                <td><select name="jenisPinjaman" id="">
+                    <option value="" name='harian'>Harian</option>
+                    <option value="" name='bulanan'>Bulanan</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>Besar Pinjaman: </td>
                 <td><input type="text" name='besarPinjaman'></td>
             </tr>
             <tr>
