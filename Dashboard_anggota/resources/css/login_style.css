@@ -1,0 +1,27 @@
+body {
+    background-color: #EAF3FA;
+}
+
+.main-content {
+    margin: 5em 2.5em;
+}
+
+.formLogin .form-group{
+    margin-top: 40px;
+}
+
+.card1 {
+    margin-left: 3em;
+    border-radius: 10px;
+}
+
+.btn-login {
+    color: white;
+    background-color: #FA9746;
+}
+
+.btn-login:hover {
+    color: white;
+    background-color: #c97a3a;
+
+}
