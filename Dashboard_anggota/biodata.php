@@ -1,6 +1,15 @@
 <?php
-    session_start();
+    require_once 'libraries/session_check.php';
     require_once 'libraries/database.php';
+
+
+    $message = '';
+    //Check session
+    if(isset($_SESSION['status'])){
+      $message = $_SESSION["status"];
+
+      unset($_SESSION["status"]);
+    } 
 
     $id_anggota = $_SESSION["userid"];
     $edit = false;
@@ -10,7 +19,6 @@
 
     if($result_anggota->num_rows) {
         $edit = true;
-        echo $edit;
     }
     
     //Check jika tombol submit ditekan
@@ -39,13 +47,22 @@
         //Cek apakah tombol ditekan untuk menambah data atau mengedit data
         if($edit) {
             //Mengedit data
+            if($name_foto == ""){
+              $name_foto = $anggota["foto"];
+            }
             $kd_anggota = $anggota["kd_anggota"];
             $result = $conn->query("UPDATE `anggota` SET `nama_anggota` = '$nama', `jenkel` = '$jk', `agama` = '$agama', `tempat_lahir` = '$tpt_lahir', `tgl_lahir` = '$tgl_lahir', `alamat` = '$alamat', `no_telp` = '$tel', `foto` = '$name_foto', `jns_pekerjaan` = '$jenis_pekerjaan', `status_kawin` = '$status_kawin' WHERE `anggota`.`kd_anggota` = '$kd_anggota';");
+            $_SESSION["status"] = "Data berhasil diubah";
+
 
         }else{
             //Menambah data baru
             $result = $conn->query("INSERT INTO `anggota` (`kd_anggota`, `nama_anggota`, `jenkel`, `agama`, `tempat_lahir`, `tgl_lahir`, `alamat`, `no_telp`, `foto`, `jns_pekerjaan`, `status_kawin`, `id_anggota`) VALUES ('$kd_anggota', '$nama', '$jk', '$agama', '$tpt_lahir', '$tgl_lahir', '$alamat', '$tel', '$name_foto', '$jenis_pekerjaan', '$status_kawin', '$id_anggota')");
+            $_SESSION["status"] = "Data berhasil disimpan";
         }
+
+        //Refresh page
+        header("Location: biodata.php");
         
         
     }
@@ -68,6 +85,8 @@
   <!-- Select2 -->
   <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <link rel="stylesheet" href="resources/css/custom.css">
@@ -103,7 +122,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="resources/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
 
@@ -112,7 +131,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="resources/assets/uploads/<?= ($anggota) ? $anggota["foto"] : "no_profile.png"?>" class="img-circle elevation-2" alt="User Image" style="width:50px; height:50px;">
         </div>
         <div class="info">
           <a href="" class="d-block">Ric</a>
@@ -133,7 +152,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pinjaman.html" class="nav-link">
+            <a href="pinjaman.php" class="nav-link">
                 <i class="nav-icon fas fa-money-bill-wave"></i>
               <p>
                 Pinjaman
@@ -242,17 +261,17 @@
                   </div>
                   <div class="form-group">
                     <label for="foto">Foto</label><br>
-                    <img src="resources/assets/uploads/202012891226.png" alt="" id="img-prev"><br>
+                    <img src="resources/assets/uploads/<?= ($edit) ? $anggota["foto"] : "" ?>" alt="" id="img-prev" class="d-none"><br>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="foto" required name="foto">
-                        <label class="custom-file-label" for="foto">sd</label>
+                        <label class="custom-file-label" for="foto">Choose file...</label>
                     </div>
                  </div>
                   
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                  <button type="submit" class="btn btn-primary" name="submit" id="submit">Submit</button>
                 </div>
           </div>
           <!--/.col (right) -->
@@ -262,8 +281,6 @@
     </section>
     <!-- /.content -->
   </div>
-
- 
 
   <!-- Main Footer -->
   <footer class="main-footer">
@@ -286,39 +303,59 @@
 <script src="plugins/jquery-validation/additional-methods.min.js"></script>
 <!-- Select2 -->
 <script src="plugins/select2/js/select2.full.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.js"></script>
 
 
 <script>
-    let edit = <?= $edit ?>;
+//Check jika mengedit data
+let edit = '<?= $edit ?>';
+
+if(edit != "") {
+
+    $("#img-prev").removeClass("d-none");
+
+    let selectedJK = '<?= (is_null($anggota)) ? "" : $anggota["jenkel"] ?>';
+    let selectedStatus = '<?= (is_null($anggota)) ? "" : $anggota["status_kawin"] ?>';
+    let selectedAgama = '<?= (is_null($anggota)) ? "" : $anggota["agama"] ?>';
     
-    if(edit) {
-        let selectedJK = '<?= $anggota["jenkel"] ?>';
-        let selectedStatus = '<?= $anggota["status_kawin"] ?>';
-        let selectedAgama = '<?= $anggota["agama"] ?>';
-        
-        // Setting selected option
-        $("#jenisKelamin").val(selectedJK);
-        $("#statusKawin").val(selectedStatus);
-        $("#agama").val(selectedAgama);
-    }
-    let foto;
+    // Setting selected option
+    $("#jenisKelamin").val(selectedJK);
+    $("#statusKawin").val(selectedStatus);
+    $("#agama").val(selectedAgama);
 
+    $("#submit").text("Simpan");
+    $("#foto").removeAttr("required");
+}
 
-    $("#foto").change( (e) => {
-      let file = e.currentTarget.files[0];
-      if(file){
-        let reader = new FileReader();
+//Cek jika mengupload file
+$("#foto").change( (e) => {
+  $("#img-prev").removeClass("d-none");
+  let file = e.currentTarget.files[0];
+  if(file){
+    let reader = new FileReader();
 
-        reader.onload = (e) => {
-          $("#img-prev").attr("src", e.target.result);
-          console.log(e);
-        };
+    reader.onload = (e) => {
+      $("#img-prev").attr("src", e.target.result);
+      console.log(e);
+    };
 
-        reader.readAsDataURL(file);
-      }
-    });
+    reader.readAsDataURL(file);
+  }
+});
+
+//Menampilkan pesan berhasil
+let message = "<?= $message?>";
+if(message != "") {
+  Swal.fire(
+  'Berhasil',
+  message,
+  'success'
+)
+}
+
 </script>
 </body>
 </html>

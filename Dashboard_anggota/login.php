@@ -19,7 +19,7 @@ if(isset($_POST["submit"])) {
 
     //Cek apakah username ada di database
     if($row){
-        echo $row["password"];
+        
         //Cek apakah password cocok dengan yang ada di database
         if(password_verify($password, $row["password"])){
             $_SESSION["userid"] = $row["id"];

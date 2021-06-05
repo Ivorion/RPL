@@ -22,6 +22,14 @@ function getDataFromDatabase($query_text){
     return $data->fetch_assoc();
 }
 
+function getDataFromAnggotaById($id_anggota) {
+	global $conn;
+
+    $data = $conn->query("SELECT * FROM anggota WHERE id_anggota ='$id_anggota'");
+
+    return $data->fetch_assoc();
+}
+
 function generate_code($tabel, $inisial){
     global $conn;
 

@@ -5,7 +5,12 @@
   $dateNow = date("F j, Y");
 
   // Mengambil data anggota
-  $anggota = getDataAnggota("P0001");
+  $anggota = getDataFromAnggotaById($_SESSION["userid"]);
+  
+  //Cek jika belum terdaftar sebagai anggota
+  if(is_null($anggota)){
+    header("Location: index.php");
+  }
 
   //Proses data
   if(isset($_POST["submit"])){
@@ -90,10 +95,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="resources/assets/uploads/<?= ($anggota) ? $anggota["foto"] : "no_profile.png"?>" class="img-circle elevation-2" alt="User Image" style="width:50px; height:50px;">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?= $_SESSION["username"]?></a>
+          <a href="biodata.php" class="d-block"><?= $_SESSION["username"]?></a>
         </div>
       </div>
 
