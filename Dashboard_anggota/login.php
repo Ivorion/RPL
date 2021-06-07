@@ -61,7 +61,7 @@ if(isset($_POST["submit"])) {
             <div class="card card1 p-5">
                 <div class="header text-center">
                     <p class="text-large">Sign In</p>
-                    <p>Don't have an account? Sign Up</p>
+                    <p class='caution'>Don't have an account? <a href="anggota_register.php">Sign Up</a></p>
                 </div>
 
                 <form id="quickForm" method="POST" action='' class="formLogin">
