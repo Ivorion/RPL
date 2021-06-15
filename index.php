@@ -15,7 +15,6 @@
 <body>
 
     <div class="navbar">
-        <button class="about-us">About Us</button>
         <button class="sign-up">Sign Up</button>
         <button class="sign-in">Sign In</button>
     </div>
@@ -45,7 +44,7 @@
     let signUp = document.querySelector('.sign-up');
     let aboutUs = document.querySelector('.about-us');
     signIn.addEventListener('click',function(){
-        window.location.href = 'anggota/anggota_login.php';
+        window.location.href = 'Dashboard_anggota/login.php';
     })
     signUp.addEventListener('click',function(){
         window.location.href = 'anggota/anggota_register.php';
